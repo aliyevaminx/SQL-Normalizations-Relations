@@ -1,0 +1,38 @@
+CREATE DATABASE LibraryManagement
+
+USE LibraryManagement
+
+CREATE TABLE Genres (
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	[Name] NVARCHAR(50)
+)
+
+CREATE TABLE Authors (
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	[Name] NVARCHAR(50),
+	Surname NVARCHAR(50)
+)
+
+CREATE TABLE Books (
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	[Name] NVARCHAR(50),
+	[Count] INT,
+	GenreId INT,
+	FOREIGN KEY(GenreId) REFERENCES Genres(Id)
+)
+
+CREATE TABLE Libraries (
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	[Name] NVARCHAR(50),
+	[Address] NVARCHAR(100),
+	BookId INT,
+	FOREIGN KEY (BookId) REFERENCES Books(Id)
+)
+
+CREATE TABLE BookAuthors (
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	BookId INT,
+	AuthorId INT,
+	FOREIGN KEY (BookId) REFERENCES Books(Id),
+	FOREIGN KEY (AuthorId) REFERENCES Authors(Id)
+)
